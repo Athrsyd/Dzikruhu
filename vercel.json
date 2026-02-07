@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api-berita",
-      "destination": "https://artikel-islam.netlify.app/.netlify/functions/api/kj"
+      "destination": "/api/berita"
     }
   ]
 }
