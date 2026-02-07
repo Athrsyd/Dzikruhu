@@ -3,6 +3,10 @@
     {
       "source": "/api-berita",
       "destination": "/api/berita"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
