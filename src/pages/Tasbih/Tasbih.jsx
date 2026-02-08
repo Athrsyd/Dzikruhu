@@ -130,7 +130,7 @@ export default function TasbihDigital() {
 
         {/* Area Biji Tasbih Melingkar - Bisa di slide */}
         <div 
-          className="relative mx-auto mb-8 cursor-pointer select-none"
+          className="relative mx-auto cursor-pointer select-none"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
