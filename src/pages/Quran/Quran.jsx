@@ -256,8 +256,8 @@ export default function Quran() {
                                 </div>
                                 <footer>
                                     <div className="h-20 w-full flex justify-between items-center mt-10">
-                                        {suratDipilih !== 1 && <button onClick={() => toDetailSurah(suratDipilih - 1)}> &lt; {quranData[suratDipilih - 2].namaLatin}</button>}
-                                        {suratDipilih !== 114 && <button onClick={() => toDetailSurah(suratDipilih + 1)}> {quranData[suratDipilih].namaLatin} &gt;</button>}
+                                        {suratDipilih !== 1 && <button onClick={() => toDetailSurah(suratDipilih - 1)}> &lt; {quranDataAsli[suratDipilih - 2].namaLatin}</button>}
+                                        {suratDipilih !== 114 && <button onClick={() => toDetailSurah(suratDipilih + 1)}> {quranDataAsli[suratDipilih].namaLatin} &gt;</button>}
                                     </div>
                                 </footer>
                             </div>)}
