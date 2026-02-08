@@ -2,7 +2,7 @@ import React from 'react'
 
 const Berita = (children) => {
     return (
-        <div key={children.key} className="berita bg-white p-4 rounded-lg min-h-80 shadow-md min-w-70 flex flex-col h-fit hover:shadow-lg transition-shadow">
+        <div className="berita bg-white p-4 rounded-lg min-h-80 shadow-md min-w-70 flex flex-col h-fit hover:shadow-lg transition-shadow">
             <div className="gambar w-full h-40 bg-green-500 rounded-lg mb-3">
                 <img className='w-full h-full object-cover rounded-lg' src={children.thumbnail} alt="" />
             </div>

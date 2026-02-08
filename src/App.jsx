@@ -10,6 +10,7 @@ import  NavPage  from './pages/NavPage/NavPage'
 import Sholat from './pages/Sholat/Sholat'
 import Home from './pages/Home/Home'
 import Setting from './pages/Setting/Setting'
+import TasbihDigital from './pages/Tasbih/Tasbih'
 
 const App = () => {
   console.log(window.innerWidth)
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/quran/*" element={<AlQuranApp />} />
           <Route path="/doa" element={<Doa />} />
           <Route path="/more" element={<NavPage />} />
+          <Route path="/tasbih" element={<TasbihDigital />} />
           <Route path="/settings" element={<Setting />} />
         </Routes>
         <Navbar />

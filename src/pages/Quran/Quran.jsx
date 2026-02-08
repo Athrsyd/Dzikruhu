@@ -1,13 +1,17 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { Book, Search, Bookmark, ChevronRight } from 'lucide-react';
 import { useNavbar } from '../../context/NavbarContext.jsx';
 import { fetchQuranList, fetchQuranDetail } from '../../services/apiQuran.js';
 import { ScrollToTop } from '../../components/ScrollToTop/ScrollToTop.jsx';
+import { useLatin } from '../../context/LatinContext.jsx';
+import { useFont } from '../../context/FontContext.jsx';
+import { Link } from 'react-router-dom';
+import { SettingsIcon } from 'lucide-react';
 
 export default function Quran() {
 
-
-
+    const fontSize = useFont().fontSize;
+    const { isLatin } = useLatin();
     const [tampilan, setTampilan] = useState('list');
     const { setIsOpen } = useNavbar();
     const [loading, setLoading] = useState(true);
@@ -16,7 +20,7 @@ export default function Quran() {
     const [suratDetail, setSuratDetail] = useState(null);
     const [suratDipilih, setSuratDipilih] = useState();
     const [terakhirDibaca, setTerakhirDibaca] = useState(null);
-    const [ search, setSearch ] = useState('');
+    const [search, setSearch] = useState('');
 
 
     useEffect(() => {
@@ -35,7 +39,7 @@ export default function Quran() {
         localStorage.setItem('terakhirDibaca', JSON.stringify(data));
         setTerakhirDibaca(data)
     };
-    
+
     const getSurat = async (nomorSurat) => {
         try {
             setLoading(true);
@@ -102,6 +106,12 @@ export default function Quran() {
     useEffect(() => {
         console.log("surat yang di pilih surat ke", suratDipilih);
     }, [suratDipilih]);
+
+    const settingsFontQuran =
+        fontSize === 'Small' ? '1.5rem' :
+            fontSize === 'Medium' ? '1.7rem' :
+                fontSize === 'Large' ? '2rem' :
+                    '2.25rem'
     return (
         <>
 
@@ -118,11 +128,11 @@ export default function Quran() {
                                 type="text"
                                 placeholder="Cari Surah atau Ayat..."
                                 className="w-full p-2 border border-gray-300 rounded"
-                                onChange={(e)=>cariSurat(e.target.value)}
+                                onChange={(e) => cariSurat(e.target.value)}
                                 value={search}
                             />
                         </div>
-                        <button onClick={test}>test</button>
+                        {/* <button onClick={test}>test</button> */}
                     </header>
                     {loading && (
                         <div className="flex justify-center items-center h-64">
@@ -184,13 +194,17 @@ export default function Quran() {
                     </div>
                 </div>) : tampilan === 'detail' && suratDetail ? (
                     <>
-                        <header className='flex flex-row justify-between items-center py-7 px-5'>
+                        <header className='flex flex-row justify-between items-center py-3 px-5'>
                             <div onClick={backToList} className=" flex justify-center items-center cursor-pointer">
                                 <ChevronRight className="w-6 h-6  rotate-180 cursor-pointer" />
                                 <h1>kembali ke menu</h1>
                             </div>
                             <div className="">
-                                <Search />
+                                <Link to="/settings">
+                                    <div className="setting">
+                                        <SettingsIcon size={28} />
+                                    </div>
+                                </Link>
                             </div>
                         </header>
                         <hr />
@@ -216,15 +230,18 @@ export default function Quran() {
                                         <div
                                             key={item.nomorAyat}
                                             className={`ayat-item ${item.nomorAyat % 2 == 0 ? "bg-neutral-200" : ''} rounded-2xl p-4`}>
-                                            <div className="flex justify-between items-center mb-4 ">
+                                            <div className="flex justify-between items-start mb-4 ">
                                                 <div className="flex items-center">
                                                     <span className="ayat-no bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">{item.nomorAyat}</span>
                                                 </div>
                                                 <div className="font-arabic text-right">
-                                                    <h1 className="text-2xl">{item.teksArab}</h1>
+                                                    <span style={{
+                                                        fontSize: settingsFontQuran
+                                                    }} className="block">{item.teksArab}</span>
                                                 </div>
                                             </div>
-                                            <p className="text-gray-700">{item.teksIndonesia}</p>
+                                            {isLatin ? <p className="text-gray-900">{item.teksLatin}</p> : ''}
+                                            <p className="text-gray-500">{item.teksIndonesia}</p>
                                             <div className="last-read">
                                                 <button
                                                     onClick={() => tandaiDibaca(suratDetail, item)}

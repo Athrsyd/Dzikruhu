@@ -8,9 +8,11 @@ import HeroHome from './Components/HeroHome';
 import JadwalSholat from './Components/JadwalSholat';
 import QuotesHome from './Components/QuotesHome';
 import Berita from './Components/Berita';
+import {useUsername} from '../../context/UsernameContext'
 
 
 const Home = () => {
+    const {username} = useUsername();
     const { provinsi, kabkota, } = useLocation();
     const [dataBerita, setDataBerita] = useState();
     const [data, setData] = useState(null);
@@ -218,7 +220,7 @@ const Home = () => {
             {/* Sambutan */}
             {sholatSekarang && sholatSetelah && (
                 <HeroHome
-                    username='orang'
+                    username={username}
                     waktuSholatSekarang={sholatSekarang ? namaSholat[sholatSekarang] : 'Loading...'}
                     waktuSekarang={waktuSekarangStr}
                     sholatSetelah={sholatSetelah ? namaSholat[sholatSetelah.name] : 'Loading...'}

@@ -4,15 +4,27 @@ import './index.css'
 import App from './App.jsx'
 import { LocationProvider } from './context/LocationContext.jsx'
 import { NavbarProvider } from './context/NavbarContext.jsx'
+import { LatinProvider } from './context/LatinContext.jsx'
 import { Analytics } from "@vercel/analytics/react"
+import { FontProvider } from './context/FontContext.jsx'
+import { UsernameProvider } from './context/UsernameContext.jsx'
+import { ThemeProvider } from './context/ThemeContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <LocationProvider>
-        <NavbarProvider>
-          <App />
-          <Analytics/>
-        </NavbarProvider>
-      </LocationProvider>
+    <LocationProvider>
+      <LatinProvider>
+        <ThemeProvider>
+        <UsernameProvider>
+          <FontProvider>
+            <NavbarProvider>
+              <App />
+              <Analytics />
+            </NavbarProvider>
+          </FontProvider>
+        </UsernameProvider>
+        </ThemeProvider>
+      </LatinProvider>
+    </LocationProvider>
   </StrictMode>,
 )

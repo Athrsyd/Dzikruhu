@@ -29,9 +29,14 @@ export const LocationProvider = ({ children }) => {
     const ambilKabKota = async () => {
       try {
         const response = await fetchKabKota(provinsi);
-        setDaftarKabKota(response.data);
-        if (response.data.length > 0) {
-          setKabkota(response.data[0]);
+        const kabkotaList = response.data || [];
+        setDaftarKabKota(kabkotaList);
+
+        if (kabkotaList.length > 0) {
+          const isValid = kabkota && kabkotaList.includes(kabkota);
+          if (!isValid) {
+            setKabkota(kabkotaList[0]);
+          }
         }
       } catch (err) {
         console.error('Gagal ambil kab/kota:', err);
