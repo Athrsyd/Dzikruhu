@@ -13,6 +13,7 @@ import Setting from './pages/Setting/Setting'
 import TasbihDigital from './pages/Tasbih/Tasbih'
 
 const App = () => {
+  // console.log(window.location.pathname)
   console.log(window.innerWidth)
   if (window.innerWidth > 850) {
     return (

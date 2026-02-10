@@ -1,30 +1,29 @@
-import {useEffect,useState} from 'react'
 import { Link } from 'react-router-dom'
+import { useNavbar } from '../../context/NavbarContext.jsx'
 
 const NavPage = () => {
-    const [page, setPage] = useState(() => {
-        return localStorage.getItem('currentPage') || 'home';
-    });
+    const { setPathBefore, setPage } = useNavbar();
 
-    const changePage = (page) => {
-        setPage(page);
+    const savePathBefore = () => {
+        setPathBefore(window.location.pathname);
     }
-    useEffect(() => {
-        localStorage.setItem('currentPage', page);
-    }, [page]);
-    return (
 
+    const changePage = (p) => {
+        setPage(p);
+    }
+
+    return (
         <div>
             <header>
                 <h1 className='text-center mt-10 text-2xl font-bold'>Mari Tingkatkan Ibadah!</h1>
             </header>
             <section className='m-5 flex flex-wrap flex-row gap-5 justify-center'>
-                <Link to="/sholat" onClick={()=>changePage('pray')}>
+                <Link to="/sholat">
                     <div className='bg-green-100 p-5 rounded-lg w-35 h-25 text-center flex justify-center items-center shadow-md'>
                         <h2 className='text-xl font-semibold mb-3'>Sholat</h2>
                     </div>
                 </Link>
-                <Link to="/quran" onClick={()=>changePage('quran')}>
+                <Link to="/quran">
                     <div className='bg-green-100 p-5 rounded-lg w-35 h-25 text-center flex justify-center items-center shadow-md'>
                         <h2 className='text-xl font-semibold mb-3'>Al-Qur'an</h2>
                     </div>
@@ -39,7 +38,7 @@ const NavPage = () => {
                         <h2 className='text-xl font-semibold mb-3'>Doa</h2>
                     </div>
                 </Link>
-                <Link to="/settings">
+                <Link to="/settings" onClick={savePathBefore}>
                     <div className='bg-green-100 p-5 rounded-lg w-35 h-25 text-center flex justify-center items-center shadow-md'>
                         <h2 className='text-xl font-semibold mb-3'>Settings</h2>
                     </div>

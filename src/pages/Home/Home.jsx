@@ -8,11 +8,13 @@ import HeroHome from './Components/HeroHome';
 import JadwalSholat from './Components/JadwalSholat';
 import QuotesHome from './Components/QuotesHome';
 import Berita from './Components/Berita';
-import {useUsername} from '../../context/UsernameContext'
+import { useUsername } from '../../context/UsernameContext'
+import { useNavbar } from '../../context/NavbarContext.jsx';
 
 
 const Home = () => {
-    const {username} = useUsername();
+    const { setPathBefore } = useNavbar();
+    const { username } = useUsername();
     const { provinsi, kabkota, } = useLocation();
     const [dataBerita, setDataBerita] = useState();
     const [data, setData] = useState(null);
@@ -140,6 +142,10 @@ const Home = () => {
     }, [provinsi, kabkota]);
 
 
+    const savePathBefore = () => {
+        setPathBefore(window.location.pathname);
+    }
+
 
     // Logic Berita
     const tanggalSekarang = new Date().getDate();
@@ -211,7 +217,7 @@ const Home = () => {
                     <span className='font-semibold text-sm ml-2'>{kabkota},<br />{provinsi}</span>
                 </div>
                 <Link to="/settings">
-                    <div className="setting">
+                    <div className="setting" onClick={savePathBefore}>
                         <SettingsIcon size={28} />
                     </div>
                 </Link>
@@ -219,12 +225,14 @@ const Home = () => {
 
             {/* Sambutan */}
             {sholatSekarang && sholatSetelah && (
-                <HeroHome
-                    username={username}
-                    waktuSholatSekarang={sholatSekarang ? namaSholat[sholatSekarang] : 'Loading...'}
-                    waktuSekarang={waktuSekarangStr}
-                    sholatSetelah={sholatSetelah ? namaSholat[sholatSetelah.name] : 'Loading...'}
-                    waktuSholatSetelah={sholatSetelah ? sholatSetelah.tersisa : '--:--'} />
+                <Link to='/sholat'>
+                    <HeroHome
+                        username={username}
+                        waktuSholatSekarang={sholatSekarang ? namaSholat[sholatSekarang] : 'Loading...'}
+                        waktuSekarang={waktuSekarangStr}
+                        sholatSetelah={sholatSetelah ? namaSholat[sholatSetelah.name] : 'Loading...'}
+                        waktuSholatSetelah={sholatSetelah ? sholatSetelah.tersisa : '--:--'} />
+                </Link>
             )}
 
             {/* Sambutan End */}
@@ -232,20 +240,22 @@ const Home = () => {
             {/* Jadwal sholat */}
 
             {jadwalHariIni && (
-                <section>
-                    <div className="mt-10 bg-green-100 rounded-2xl w-full mb-5">
-                        <div className="text-neutral-600 flex flex-row justify-between items-center">
-                            {jadwalSholatMap.map((sholat) => (
-                                <JadwalSholat
-                                    key={sholat.id}
-                                    sholatSekarang={sholatSekarang}
-                                    namaSholat={sholat.nama}
-                                    iconSholat={sholat.icon}
-                                    waktuSholat={sholat.waktu} />
-                            ))}
+                <Link to='/sholat'>
+                    <section>
+                        <div className="mt-10 bg-green-100 rounded-2xl w-full mb-5">
+                            <div className="text-neutral-600 flex flex-row justify-between items-center">
+                                {jadwalSholatMap.map((sholat) => (
+                                    <JadwalSholat
+                                        key={sholat.id}
+                                        sholatSekarang={sholatSekarang}
+                                        namaSholat={sholat.nama}
+                                        iconSholat={sholat.icon}
+                                        waktuSholat={sholat.waktu} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </Link>
             )}
             {/* Jadwal sholat end */}
 
@@ -266,11 +276,11 @@ const Home = () => {
                         {
                             dataBerita ? dataBerita.map((berita, i) => (
                                 <Berita
-                                key={i}
-                                thumbnail={berita.thumbnail}
-                                title={berita.title}
-                                date={berita.date}
-                                url={berita.url}
+                                    key={i}
+                                    thumbnail={berita.thumbnail}
+                                    title={berita.title}
+                                    date={berita.date}
+                                    url={berita.url}
                                 />
                             )) : <p>Loading...</p>
                         }

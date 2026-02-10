@@ -14,7 +14,7 @@ const Setting = () => {
   const { fontSize, setFontSize } = useFont();
   const { isLatin, setIsLatin } = useLatin();
   const { theme, setTheme } = useTheme();
-  const { setIsOpen } = useNavbar();
+  const { setIsOpen, pathBefore, setPathBefore } = useNavbar();
   const [openSetting, setOpenSetting] = useState('');
   const [settings, setSettings] = useState({
     latin: isLatin,
@@ -142,32 +142,32 @@ const Setting = () => {
       <ScrollToTop />
       <div>
         <div className="flex items-center p-4 border-b border-gray-300">
-          <Link to="/" onClick={handleBack} className="mr-4 text-blue-500 hover:text-blue-700">
+          <Link to={pathBefore} onClick={handleBack} className="mr-4 text-blue-500 hover:text-blue-700">
             &#8592; Back
           </Link>
         </div>
         <div className="p-5">
-          <h1 className="text-3xl font-bold">Settings</h1>
-          <div className='search-setting'>
+          <h1 className="text-3xl font-bold mb-10">Settings</h1>
+          {/* <div className='search-setting'>
             <input
               type="text"
               placeholder="Search settings..."
               className="w-full p-2 border border-gray-300 rounded-2xl outline-none mt-4"
             />
-          </div>
+          </div> */}
           <div className="mt-6">
             <ul className="flex flex-col gap-4">
               {settingsMenu.map(item => (
                 <div key={item.id}>
                   <li
-                    className='bg-green-200 p-3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-green-300 transition'
+                    className='bg-green-200 p-3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-green-300 transition-all duration-500 ease-in-out'
                     onClick={() => setOpenSetting(openSetting === item.id ? '' : item.id)}
                   >
                     {item.label}
                     <span className={openSetting === item.id ? 'rotate-90' : ''}>&gt;</span>
                   </li>
                   {openSetting === item.id && (
-                    <div className="bg-green-50 p-4 rounded-lg mt-2">
+                    <div className={`bg-green-50 rounded-lg mt-2 overflow-hidden transition-all duration-300 ease-in-out ${openSetting === item.id ? 'max-h-96 p-4' : 'max-h-0 p-0'}`}>
                       {renderSettingForm(item)}
                     </div>
                   )}

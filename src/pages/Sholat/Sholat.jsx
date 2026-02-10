@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import MainBento from './Components/MainBento';
 import SecBento from './Components/SecBento';
 import BarStatus from './Components/BarStatus';
-import JadwalSholat from './Components/JadwalSholat'; 
+import JadwalSholat from './Components/JadwalSholat';
+import { useNavbar } from '../../context/NavbarContext.jsx';
 
 const Sholat = () => {
   const { provinsi, setProvinsi, kabkota, setKabkota, daftarProvinsi, daftarKabKota } = useLocation();
-
+  const { setPathBefore } = useNavbar();
   const [data, setData] = useState(null);
   const [jadwalHariIni, setJadwalHariIni] = useState(null);
   const [error, setError] = useState(null);
@@ -164,6 +165,11 @@ const Sholat = () => {
     });
   };
 
+
+  const savePathBefore = () => {
+    setPathBefore(window.location.pathname);
+  }
+
   return (
     <div className='m-5'>
       <header className='flex flex-row justify-between items-center'>
@@ -172,7 +178,7 @@ const Sholat = () => {
           <span className='font-semibold text-sm ml-2'>{kabkota},<br />{provinsi}</span>
         </div>
         <Link to="/settings">
-          <div className="setting">
+          <div className="setting" onClick={savePathBefore}>
             <SettingsIcon size={28} />
           </div>
         </Link>

@@ -6,10 +6,12 @@ import { ScrollToTop } from '../../components/ScrollToTop/ScrollToTop.jsx';
 import { useLatin } from '../../context/LatinContext.jsx';
 import { useFont } from '../../context/FontContext.jsx';
 import { Link } from 'react-router-dom';
-import { SettingsIcon } from 'lucide-react';
+import { SettingsIcon, Heart } from 'lucide-react';
+// import { useNavbar } from '../../context/NavbarContext.jsx';
 
 export default function Quran() {
 
+    const { setPathBefore } = useNavbar();
     const fontSize = useFont().fontSize;
     const { isLatin } = useLatin();
     const [tampilan, setTampilan] = useState('list');
@@ -22,6 +24,16 @@ export default function Quran() {
     const [terakhirDibaca, setTerakhirDibaca] = useState(null);
     const [search, setSearch] = useState('');
 
+    const [quranPage, setQuranPage] = useState('list');
+    const [ayatDiSukai, setAyatDiSukai] = useState(() => {
+        try {
+            const saved = localStorage.getItem('ayatDisukai');
+            return saved ? JSON.parse(saved) : [];
+        } catch {
+            return [];
+        }
+    });
+
 
     useEffect(() => {
         const saved = localStorage.getItem('terakhirDibaca');
@@ -29,6 +41,9 @@ export default function Quran() {
             setTerakhirDibaca(JSON.parse(saved))
         }
     }, [])
+    useEffect(() => {
+        localStorage.setItem('ayatDisukai', JSON.stringify(ayatDiSukai));
+    }, [ayatDiSukai])
 
     const tandaiDibaca = (surat, ayat) => {
         const data = {
@@ -39,6 +54,24 @@ export default function Quran() {
         localStorage.setItem('terakhirDibaca', JSON.stringify(data));
         setTerakhirDibaca(data)
     };
+    const toggleAyatDiSukai = (surat, ayat) => {
+        const exists = ayatDiSukai.find(
+            (item) => item.nomorSurah === surat.nomor && item.nomorAyat === ayat.nomorAyat
+        );
+        let updatedAyatDiSukai;
+        if (exists) {
+            updatedAyatDiSukai = ayatDiSukai.filter(
+                (item) => !(item.nomorSurah === surat.nomor && item.nomorAyat === ayat.nomorAyat)
+            );
+        } else {
+            updatedAyatDiSukai = [...ayatDiSukai, {
+                nomorSurah: surat.nomor,
+                namaSurah: surat.namaLatin,
+                nomorAyat: ayat.nomorAyat,
+            }];
+        }
+        setAyatDiSukai(updatedAyatDiSukai);
+    }
 
     const getSurat = async (nomorSurat) => {
         try {
@@ -72,6 +105,12 @@ export default function Quran() {
     useEffect(() => {
         getQuran()
     }, [])
+
+
+    const savePathBefore = () => {
+        setPathBefore(window.location.pathname);
+    }
+
 
     const test = () => console.log(quranData);
 
@@ -159,39 +198,89 @@ export default function Quran() {
                         </div>
                     </div>
 
-                    <div className="surah-list w-19/20 mx-auto">
-                        {quranData.map((surat) => (
-                            <div
-                                key={surat.nomor}
-                                onClick={() => toDetailSurah(surat.nomor)}
-                                className="surah-item flex justify-between items-center p-4 mb-4 border bg-neutral-200 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all ease-in-out duration-300">
-                                <div className=" flex justify-start items-center w-full ">
+                    <div className="NavQuran w-full flex flex-row mb-4">
+                        <button
+                            className={` w-1/2 p-2 mr-4 rounded-xl ${quranPage === 'list' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                            onClick={() => setQuranPage('list')}>
+                            Daftar Surah
+                        </button>
+                        <button
+                            className={`w-1/2 p-2 rounded-xl ${quranPage === 'favorites' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                            onClick={() => setQuranPage('favorites')}>
+                            Ayat Disukai
+                        </button>
+                    </div>
+                    {quranPage === 'list' ? (
+                        <div className="surah-list w-19/20 mx-auto">
+                            {quranData.map((surat) => (
+                                <div
+                                    key={surat.nomor}
+                                    onClick={() => toDetailSurah(surat.nomor)}
+                                    className="surah-item flex justify-between items-center p-4 mb-4 border bg-neutral-200 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all ease-in-out duration-300">
+                                    <div className=" flex justify-start items-center w-full ">
 
-                                    <div className="no flex justify-center items-center mr-5">
-                                        <div className="relative w-10 h-11 flex items-center justify-center">
-                                            <svg className="absolute w-full h-full" viewBox="0 0 40 44">
-                                                <polygon
-                                                    points="20,2 38,12 38,32 20,42 2,32 2,12"
-                                                    fill="none"
-                                                    stroke="#9ca3af"
-                                                    strokeWidth="1.5"
-                                                />
-                                            </svg>
-                                            <span className="text-sm font-semibold">{surat.nomor}</span>
+                                        <div className="no flex justify-center items-center mr-5">
+                                            <div className="relative w-10 h-11 flex items-center justify-center">
+                                                <svg className="absolute w-full h-full" viewBox="0 0 40 44">
+                                                    <polygon
+                                                        points="20,2 38,12 38,32 20,42 2,32 2,12"
+                                                        fill="none"
+                                                        stroke="#9ca3af"
+                                                        strokeWidth="1.5"
+                                                    />
+                                                </svg>
+                                                <span className="text-sm font-semibold">{surat.nomor}</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 className="font-bold text-md">{surat.namaLatin} </h2>
+                                            <p className="text-sm text-gray-600">{surat.tempatTurun} | {surat.jumlahAyat} Ayat</p>
                                         </div>
                                     </div>
-                                    <div>
-                                        <h2 className="font-bold text-md">{surat.namaLatin} </h2>
-                                        <p className="text-sm text-gray-600">{surat.tempatTurun} | {surat.jumlahAyat} Ayat</p>
+                                    <div className='text-arab w-25'>
+                                        <h1 className="text-lg text-right font-arabic font-bold">{surat.nama}</h1>
                                     </div>
                                 </div>
-                                <div className='text-arab w-25'>
-                                    <h1 className="text-lg text-right font-arabic font-bold">{surat.nama}</h1>
-                                </div>
-                            </div>
 
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="ayat-disukai-list w-19/20 mx-auto">
+                            {ayatDiSukai.length === 0 ? (
+                                <p className="text-gray-600">Belum ada ayat yang disukai.</p>
+                            ) : (
+                                ayatDiSukai.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        onClick={() => toDetailSurah(item.nomorSurah)}
+                                        className="surah-item flex justify-between items-center p-4 mb-4 border bg-neutral-200 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all ease-in-out duration-300">
+                                        <div className="flex justify-start items-center w-full">
+                                            <div className="no flex justify-center items-center mr-5">
+                                                <div className="relative w-10 h-11 flex items-center justify-center">
+                                                    <svg className="absolute w-full h-full" viewBox="0 0 40 44">
+                                                        <polygon
+                                                            points="20,2 38,12 38,32 20,42 2,32 2,12"
+                                                            fill="none"
+                                                            stroke="#9ca3af"
+                                                            strokeWidth="1.5"
+                                                        />
+                                                    </svg>
+                                                    <span className="text-sm font-semibold">{item.nomorSurah}</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h2 className="font-bold text-md">{item.namaSurah}</h2>
+                                                <p className="text-sm text-gray-600">Ayat {item.nomorAyat}</p>
+                                            </div>
+                                        </div>
+                                        <Heart className="w-5 h-5 text-red-600" fill="currentColor" />
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    )}
                 </div>) : tampilan === 'detail' && suratDetail ? (
                     <>
                         <header className='flex flex-row justify-between items-center py-3 px-5'>
@@ -201,7 +290,7 @@ export default function Quran() {
                             </div>
                             <div className="">
                                 <Link to="/settings">
-                                    <div className="setting">
+                                    <div className="setting" onClick={savePathBefore}>
                                         <SettingsIcon size={28} />
                                     </div>
                                 </Link>
@@ -242,14 +331,26 @@ export default function Quran() {
                                             </div>
                                             {isLatin ? <p className="text-gray-900">{item.teksLatin}</p> : ''}
                                             <p className="text-gray-500">{item.teksIndonesia}</p>
-                                            <div className="last-read">
-                                                <button
-                                                    onClick={() => tandaiDibaca(suratDetail, item)}
-                                                    className={`p-1 rounded ${terakhirDibaca?.nomorSurah === suratDetail.nomor && terakhirDibaca?.nomorAyat === item.nomorAyat ? 'text-yellow-500' : 'text-gray-400'} flex flex-row items-center gap-2 mt-4`}
-                                                    title="Tandai terakhir dibaca"
-                                                >
-                                                    <Bookmark className="w-5 h-5" fill={terakhirDibaca?.nomorSurah === suratDetail.nomor && terakhirDibaca?.nomorAyat === item.nomorAyat ? 'currentColor' : 'none'} />
-                                                </button>
+                                            <div className="buttons flex flex-row gap-3">
+
+                                                <div className="last-read">
+                                                    <button
+                                                        onClick={() => tandaiDibaca(suratDetail, item)}
+                                                        className={`p-1 rounded ${terakhirDibaca?.nomorSurah === suratDetail.nomor && terakhirDibaca?.nomorAyat === item.nomorAyat ? 'text-yellow-500' : 'text-gray-400'} flex flex-row items-center gap-2 mt-4 transition-colors hover:text-yellow-400 `}
+                                                        title="Tandai terakhir dibaca"
+                                                    >
+                                                        <Bookmark className="w-5 h-5" fill={terakhirDibaca?.nomorSurah === suratDetail.nomor && terakhirDibaca?.nomorAyat === item.nomorAyat ? 'currentColor' : 'none'} />
+                                                    </button>
+                                                </div>
+                                                <div className="ayat-disukai">
+                                                    <button
+                                                        onClick={() => toggleAyatDiSukai(suratDetail, item)}
+                                                        className={`p-1 rounded ${ayatDiSukai.some(a => a.nomorSurah === suratDetail.nomor && a.nomorAyat === item.nomorAyat) ? 'text-red-600' : 'text-gray-400'} flex flex-row items-center gap-2 mt-4 hover:text-red-500 transition-colors`}
+                                                        title="Tambahkan ke Ayat Disukai"
+                                                    >
+                                                        <Heart className="w-5 h-5" fill={ayatDiSukai.some(a => a.nomorSurah === suratDetail.nomor && a.nomorAyat === item.nomorAyat) ? 'currentColor' : 'none'} />
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
@@ -263,7 +364,7 @@ export default function Quran() {
                             </div>)}
                     </>
                 ) : null}
-            {/* <ScrollToTop /> */}
-        </>
-    );
+                    {/* <ScrollToTop /> */}
+                </>
+                );
 }
