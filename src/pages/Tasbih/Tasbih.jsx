@@ -117,7 +117,7 @@ export default function TasbihDigital() {
             <div className="w-full max-w-md bg-white/40 backdrop-blur-xl rounded-3xl shadow-xl border border-white/60 p-8">
 
                 {/* Header */}
-                <Link to='/'>
+                <Link to='/more'>
                     <div onClick={backButton()} className="mb-5 flex items-center cursor-pointer group">
                         <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm mr-2 group-hover:bg-emerald-50 transition-colors">
                             <ChevronRight className="w-5 h-5 text-emerald-600 rotate-180" />
