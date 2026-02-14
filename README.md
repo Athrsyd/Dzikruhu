@@ -38,14 +38,7 @@ Aplikasi ini membantu pengguna dalam beribadah sehari-hari melalui fitur Al-Qur'
 
 ---
 
-# 🌙 Dzikruhu — Aplikasi Muslim Modern
 
-![Muslim App](https://img.shields.io/badge/Muslim%20App-Islamic%20Application-green)
-![React](https://img.shields.io/badge/React-19.2.0-blue)
-![Vite](https://img.shields.io/badge/Vite-7.2.4-purple)
-
-
----
 
 ## 🛠 Teknologi yang Digunakan
 
