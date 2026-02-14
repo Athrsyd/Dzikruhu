@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 const LoadingScreen = ({ onFinish }) => {
     const [progress, setProgress] = useState(0)
     const [fadeOut, setFadeOut] = useState(false)
+    const [firstLoad, setFirstLoad] = useState(true)
 
     useEffect(() => {
         const interval = setInterval(() => {

@@ -225,13 +225,13 @@ const Home = () => {
     const waktuSekarangStr = `${waktuSekarang.getHours().toString().padStart(2, '0')}:${waktuSekarang.getMinutes().toString().padStart(2, '0')}:${waktuSekarang.getSeconds().toString().padStart(2, '0')}`;
 
     return (
-        <div className='min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 p-6'>
+        <div className='min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 p-5'>
             <header className='flex flex-row justify-between items-center'>
                 <div className="lokasi flex flex-row items-center">
                     <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm">
                         <MapPin size={22} className="text-emerald-600" />
                     </div>
-                    <span className='font-semibold text-sm ml-3 text-gray-700'>{kabkota},<br /><span className='text-gray-400 text-xs'>{provinsi}</span></span>
+                    <span className=' text-xs ml-3 text-gray-400'>{kabkota},<br /><span className='text-gray-700 font-semibold text-sm'>{provinsi}</span></span>
                 </div>
                 <Link to="/settings">
                     <div className="setting p-2.5 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm hover:shadow-md transition-all" onClick={savePathBefore}>
