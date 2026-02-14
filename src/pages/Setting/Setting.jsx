@@ -41,7 +41,7 @@ const Setting = () => {
     { id: 'fontQuran', label: 'Ganti Ukuran Font Alquran', type: 'select', options: ['Small', 'Medium', 'Large', 'Extra Large'] },
     { id: 'username', label: 'Ganti Nama Pengguna', type: 'text' },
     { id: 'lokasi', label: 'Ganti Lokasi', type: 'location' },
-    { id: 'tema', label: 'Ganti Tema', type: 'select', options: ['light', 'dark'] }
+    // { id: 'tema', label: 'Ganti Tema', type: 'select', options: ['light', 'dark'] }
   ];
 
   useEffect(() => {
