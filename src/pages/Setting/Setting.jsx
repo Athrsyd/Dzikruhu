@@ -188,10 +188,12 @@ const Setting = () => {
             ))}
 
             {/* Info Pembuat */}
+            <a href="https://www.instagram.com/athrsyd__">
             <button className="w-full bg-white/50 backdrop-blur-md border border-white/60 p-4 rounded-2xl flex justify-between items-center font-semibold text-sm text-gray-700 cursor-pointer hover:bg-white/70 hover:shadow-md shadow-sm transition-all duration-300">
               <span>Informasi Pembuat</span>
               <svg className="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </button>
+            </a>
 
             {/* Hapus Semua Data */}
             <button
