@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api-berita",
-      "destination": "/src/services/api/berita.js"
+      "destination": "/api/berita"
     },
     {
       "source": "/(.*)",
