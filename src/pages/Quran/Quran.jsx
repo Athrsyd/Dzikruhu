@@ -321,7 +321,7 @@ export default function Quran() {
                                 {suratDipilih !== 1 && suratDipilih !== 9 && (
                                     <div className="text-center mb-8">
                                         <div className="inline-block bg-white/60 backdrop-blur-md text-2xl px-8 py-3 rounded-2xl font-bold font-arabic text-emerald-800 border border-white/60 shadow-sm">
-                                            Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…
+                                            بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
                                         </div>
                                     </div>
                                 )}
