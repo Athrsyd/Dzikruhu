@@ -25,35 +25,37 @@ const Navbar = () => {
     setPathBefore(pathname);
   }
 
+  const navItems = [
+    { id: 'home', to: '/', icon: IoHomeSharp, label: 'Home' },
+    { id: 'pray', to: '/sholat', icon: FaMosque, label: 'Sholat' },
+    { id: 'quran', to: '/quran', icon: FaQuran, label: 'Quran' },
+    { id: 'more', to: '/more', icon: MdOutlineMoreHoriz, label: 'Lainnya' },
+  ]
+
   if (!isOpen) return null;
   return (
-    <header className="p-5 w-full fixed bottom-0 left-0 right-0 z-50">
-      <nav className="bg-green-600 p-2 text-white w-full rounded-xl">
-        <div className="contaier flex flex-row items-start justify-between">
-          <Link to="/" onClick={savePathBefore}>
-            <div className={`home flex flex-col items-center p-2 rounded-lg ${activePage === 'home' ? 'bg-green-800' : ''}`}>
-              <IoHomeSharp size={20} />
-              <h3 className='font-bold'>Home</h3>
-            </div>
-          </Link>
-          <Link to="/sholat" onClick={savePathBefore}>
-            <div className={`pray flex flex-col items-center p-2 rounded-lg ${activePage === 'pray' ? 'bg-green-800' : ''}`}>
-              <FaMosque size={20} />
-              <h3 className='font-bold'>Sholat</h3>
-            </div>
-          </Link>
-          <Link to="/quran" onClick={savePathBefore}>
-            <div className={`quran flex flex-col items-center p-2 rounded-lg ${activePage === 'quran' ? 'bg-green-800' : ''}`}>
-              <FaQuran size={20} />
-              <h3 className='font-bold'>Quran</h3>
-            </div>
-          </Link>
-          <Link to="/more" onClick={savePathBefore}>
-            <div className={`tasbih flex flex-col items-center p-2 rounded-lg ${activePage === 'more' ? 'bg-green-800' : ''}`}>
-              <MdOutlineMoreHoriz size={20} />
-              <h3 className='font-bold'>lainnya</h3>
-            </div>
-          </Link>
+    <header className="w-full fixed bottom-0 left-0 z-50 px-4 pb-5">
+      <nav className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/10 rounded-2xl px-2 py-2">
+        <div className="flex flex-row items-center justify-around">
+          {navItems.map((item) => {
+            const isActive = activePage === item.id;
+            const Icon = item.icon;
+            return (
+              <Link key={item.id} to={item.to} onClick={savePathBefore} className="flex-1 flex justify-center">
+                <div className={`flex flex-col items-center px-3 rounded-xl transition-all duration-300 ease-in-out relative
+                  ${isActive ? 'text-white -translate-y-6' : 'text-gray-400 py-2'}`}>
+                  <div className={`p-3 rounded-full transition-all duration-300 
+                    ${isActive ? 'bg-emerald-500 shadow-lg shadow-emerald-500/40 scale-110' : ''}`}>
+                    <Icon size={isActive ? 22 : 20} />
+                  </div>
+                  <span className={`text-[10px] mt-1 font-semibold tracking-wide transition-all duration-300
+                    ${isActive ? 'text-emerald-600' : 'text-gray-400'}`}>
+                    {item.label}
+                  </span>
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </nav>
     </header>
