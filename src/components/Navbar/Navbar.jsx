@@ -34,7 +34,7 @@ const Navbar = () => {
 
   if (!isOpen) return null;
   return (
-    <header className="w-full fixed bottom-0 left-0 z-50 px-4 pb-5">
+    <header className="w-full fixed -bottom-5 left-0 z-50 px-4 pb-5">
       <nav className="bg-green-500/30 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/10 rounded-t-2xl px-2 ">
         <div className="flex flex-row items-center justify-around">
           {navItems.map((item) => {
