@@ -7,6 +7,7 @@ import { useFont } from '../../context/FontContext.jsx';
 import { useUsername } from '../../context/UsernameContext.jsx';
 import { useLocation } from '../../context/LocationContext.jsx';
 import { useTheme } from '../../context/ThemeContext.jsx';
+import {Trash2} from 'lucide-react'
 
 const Setting = () => {
   const { provinsi, setProvinsi, kabkota, setKabkota, daftarProvinsi, daftarKabKota, } = useLocation();
@@ -137,6 +138,10 @@ const Setting = () => {
         return null;
     }
   }
+  const hapusSemuaData = () => {
+    localStorage.clear();
+    setUsername('');
+  }
   return (
     <>
       <ScrollToTop />
@@ -156,9 +161,9 @@ const Setting = () => {
             />
           </div> */}
           <div className="mt-6">
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col justify-center items-center gap-4">
               {settingsMenu.map(item => (
-                <div key={item.id}>
+                <div key={item.id} className='w-full '>
                   <li
                     className='bg-green-200 p-3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-green-300 transition-all duration-500 ease-in-out'
                     onClick={() => setOpenSetting(openSetting === item.id ? '' : item.id)}
@@ -173,7 +178,10 @@ const Setting = () => {
                   )}
                 </div>
               ))}
-              <li className='bg-green-200 p-3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-green-300 transition'>Infomasi Pembuat <span>&gt;</span></li>
+              <li className='bg-green-200 w-full p-3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-green-300 transition'>Infomasi Pembuat <span>&gt;</span></li>
+              <li 
+              onClick={()=> hapusSemuaData()}
+              className='items-center bg-red-200 p-3 w-2/3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-red-300 transition'>Hapus Semua Data <span className='bg-red-300 p-2 rounded-2xl '><Trash2/></span></li>
             </ul>
           </div>
         </div>

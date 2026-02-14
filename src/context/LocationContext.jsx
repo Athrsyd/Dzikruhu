@@ -4,10 +4,12 @@ import { fetchProvinsi, fetchKabKota } from '../services/apiSholat';
 const LocationContext = createContext();
 
 export const LocationProvider = ({ children }) => {
-  const [provinsi, setProvinsi] = useState(()=> {
-    return localStorage.getItem('provinsi') || 'DKI Jakarta'})
+  const [provinsi, setProvinsi] = useState(() => {
+    return localStorage.getItem('provinsi')
+  })
   const [kabkota, setKabkota] = useState(() => {
-    return localStorage.getItem('kabkota') || 'Kota Jakarta'});
+    return localStorage.getItem('kabkota')
+  });
   const [daftarProvinsi, setDaftarProvinsi] = useState([]);
   const [daftarKabKota, setDaftarKabKota] = useState([]);
 
@@ -48,7 +50,7 @@ export const LocationProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('provinsi', provinsi);
     localStorage.setItem('kabkota', kabkota);
-  }, [provinsi,kabkota]);
+  }, [provinsi, kabkota]);
 
   const value = {
     provinsi,

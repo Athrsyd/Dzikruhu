@@ -1,6 +1,7 @@
-import React, { use } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Smartphone, AlertCircle } from 'lucide-react'
+import LoadingScreen from './components/LoadingScreen/LoadingScreen'
 import WaktuSholat from './pages/WaktuSholat/WaktuSholat'
 import Navbar from './components/Navbar/Navbar'
 import AlQuranApp from './pages/Quran/Quran'
@@ -11,8 +12,11 @@ import Sholat from './pages/Sholat/Sholat'
 import Home from './pages/Home/Home'
 import Setting from './pages/Setting/Setting'
 import TasbihDigital from './pages/Tasbih/Tasbih'
+import { useNavigate } from 'react-router-dom'
+import Login from './pages/Login/Login'
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true)
   // console.log(window.location.pathname)
   console.log(window.innerWidth)
   if (window.innerWidth > 850) {
@@ -25,10 +29,14 @@ const App = () => {
       </div>
     )
   }
+
+
   return (
     <>
+      {isLoading && <LoadingScreen onFinish={() => setIsLoading(false)} />}
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           {/* <Route path="/kiblat" element={<QiblatFinder/>} /> */}
           <Route path='sholat' element={<Sholat/>}/>

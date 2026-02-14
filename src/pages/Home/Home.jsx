@@ -10,10 +10,24 @@ import QuotesHome from './Components/QuotesHome';
 import Berita from './Components/Berita';
 import { useUsername } from '../../context/UsernameContext'
 import { useNavbar } from '../../context/NavbarContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
-    const { setPathBefore } = useNavbar();
+
+    const dataUsername = localStorage.getItem('username')
+    const dataKabupaten = localStorage.getItem('kabkota')
+    const dataProvinsi = localStorage.getItem('provinsi')
+    const navigate = useNavigate()
+
+    
+    useEffect(() => {
+        if (!dataUsername || !dataKabupaten || !dataProvinsi) {
+            navigate('/login')
+        }
+    }, [])
+
+    const { setPathBefore,setIsOpen } = useNavbar();
     const { username } = useUsername();
     const { provinsi, kabkota, } = useLocation();
     const [dataBerita, setDataBerita] = useState();
@@ -126,6 +140,7 @@ const Home = () => {
         }, 1000);
 
         return () => clearInterval(timer);
+        setIsOpen(true);
     }, [])
 
     // Ambil data sholat saat provinsi atau kabkota berubah
