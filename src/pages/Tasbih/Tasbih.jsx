@@ -58,11 +58,11 @@ export default function TasbihDigital() {
 
         // Jika geser ke kiri (lebih dari 50px) = tambah
         if (diff < -50) {
-            increment();
+            decrement();
         }
         // Jika geser ke kanan (lebih dari 50px) = kurang
         else if (diff > 50) {
-            decrement();
+            increment();
         }
 
         // Reset posisi
@@ -113,7 +113,7 @@ export default function TasbihDigital() {
     };
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 flex items-center justify-center p-4 mb-15">
             <div className="w-full max-w-md bg-white/40 backdrop-blur-xl rounded-3xl shadow-xl border border-white/60 p-8">
 
                 {/* Header */}
@@ -215,7 +215,7 @@ export default function TasbihDigital() {
                     Reset
                 </button>
 
-                {/* Notif Selesai */}
+                
                 {count >= target && (
                     <div className="mt-6 p-4 bg-emerald-50/80 backdrop-blur-md border border-emerald-200/50 rounded-2xl text-center">
                         <p className="text-emerald-700 font-semibold">
