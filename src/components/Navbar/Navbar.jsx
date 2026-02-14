@@ -35,7 +35,7 @@ const Navbar = () => {
   if (!isOpen) return null;
   return (
     <header className="w-full fixed bottom-0 left-0 z-50 px-4 pb-5">
-      <nav className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/10 rounded-2xl px-2 py-2">
+      <nav className="bg-white/30 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/10 rounded-2xl px-2 py-2">
         <div className="flex flex-row items-center justify-around">
           {navItems.map((item) => {
             const isActive = activePage === item.id;
@@ -43,7 +43,7 @@ const Navbar = () => {
             return (
               <Link key={item.id} to={item.to} onClick={savePathBefore} className="flex-1 flex justify-center">
                 <div className={`flex flex-col items-center px-3 rounded-xl transition-all duration-300 ease-in-out relative
-                  ${isActive ? 'text-white -translate-y-6' : 'text-gray-400 py-2'}`}>
+                  ${isActive ? 'text-white -translate-y-4' : 'text-gray-400 py-2'}`}>
                   <div className={`p-3 rounded-full transition-all duration-300 
                     ${isActive ? 'bg-emerald-500 shadow-lg shadow-emerald-500/40 scale-110' : ''}`}>
                     <Icon size={isActive ? 22 : 20} />
