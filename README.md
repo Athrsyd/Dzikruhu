@@ -1,4 +1,4 @@
-# 🌙 Dzikruhu — Aplikasi Muslim Modern
+# ![](/public/MuslimApp_Logo%20(1).png) Dzikruhu — Aplikasi Muslim Modern
 
 ![Muslim App](https://img.shields.io/badge/Muslim%20App-Islamic%20Application-green)
 ![React](https://img.shields.io/badge/React-19.2.0-blue)
