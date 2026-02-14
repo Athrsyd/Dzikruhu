@@ -38,33 +38,39 @@ Aplikasi ini membantu pengguna dalam beribadah sehari-hari melalui fitur Al-Qur'
 
 ---
 
+# 🌙 Dzikruhu — Aplikasi Muslim Modern
+
+![Muslim App](https://img.shields.io/badge/Muslim%20App-Islamic%20Application-green)
+![React](https://img.shields.io/badge/React-19.2.0-blue)
+![Vite](https://img.shields.io/badge/Vite-7.2.4-purple)
+
+
+---
+
 ## 🛠 Teknologi yang Digunakan
 
-| Teknologi | Versi | Fungsi |
-|-----------|--------|--------|
-| React | 19.2.0 | Library untuk membangun UI |
-| Vite | 7.2.4 | Build tool modern |
-| React Router DOM | 7.12.0 | Routing & navigasi |
-| Axios | 1.13.2 | HTTP client |
-| Tailwind CSS | 4.1.18 | Styling utility-first |
-| Lucide React | 0.562.0 | Icon modern |
-| React Icons | 5.5.0 | Koleksi ikon populer |
-| React Loading Skeleton | 3.5.0 | Loading UI |
-| Vercel Analytics | 1.6.1 | Monitoring performa |
-| ESLint | 9.39.1 | Quality control kode |
+| Logo | Teknologi | Versi | Fungsi |
+|------|------------|--------|--------|
+| <img src="https://cdn.simpleicons.org/react/61DAFB" width="25"/> | React | 19.2.0 | Library untuk membangun UI |
+| <img src="https://cdn.simpleicons.org/vite/646CFF" width="25"/> | Vite | 7.2.4 | Build tool modern |
+| <img src="https://cdn.simpleicons.org/reactrouter/CA4245" width="25"/> | React Router DOM | 7.12.0 | Routing & navigasi |
+| <img src="https://cdn.simpleicons.org/axios/5A29E4" width="25"/> | Axios | 1.13.2 | HTTP client |
+| <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" width="25"/> | Tailwind CSS | 4.1.18 | Styling utility-first |
+| <img src="https://cdn.simpleicons.org/lucide/000000" width="25"/> | Lucide React | 0.562.0 | Icon modern |
+| <img src="https://cdn.simpleicons.org/react/61DAFB" width="25"/> | React Icons | 5.5.0 | Koleksi ikon populer |
+| <img src="https://cdn.simpleicons.org/vercel/000000" width="25"/> | Vercel Analytics | 1.6.1 | Monitoring performa |
+| <img src="https://cdn.simpleicons.org/eslint/4B32C3" width="25"/> | ESLint | 9.39.1 | Quality control kode |
 
 ---
 
 ## 🌐 Sumber API
 
-| API | Endpoint | Fungsi |
-|-----|----------|--------|
-| Equran API (Al-Qur'an) | https://equran.id/api/v2/surat | Data surat & terjemahan |
-| Equran API (Sholat) | https://equran.id/api/v2/shalat | Jadwal sholat Indonesia |
-| Equran API (Doa) | https://equran.id/api/doa | Doa-doa harian |
-| Artikel Islam API | https://artikel-islam.netlify.app/.netlify/functions/api/kj | Berita & artikel |
-
----
+| Logo | API | Endpoint | Fungsi |
+|------|------|----------|--------|
+| <img src="https://www.google.com/s2/favicons?domain=equran.id&sz=64" width="25"/> | Equran API (Al-Qur'an) | https://equran.id/api/v2/surat | Data surat & terjemahan |
+| <img src="https://www.google.com/s2/favicons?domain=equran.id&sz=64" width="25"/> | Equran API (Sholat) | https://equran.id/api/v2/shalat | Jadwal sholat Indonesia |
+| <img src="https://www.google.com/s2/favicons?domain=equran.id&sz=64" width="25"/> | Equran API (Doa) | https://equran.id/api/doa | Doa-doa harian |
+| <img src="https://www.google.com/s2/favicons?domain=artikel-islam.netlify.app&sz=64" width="25"/> | Artikel Islam API | https://artikel-islam.netlify.app/.netlify/functions/api/kj | Berita & artikel |
 
 ## 💻 Cara Menjalankan Project
 
