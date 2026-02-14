@@ -2,22 +2,23 @@ import React from 'react'
 
 const SecBento = ({ waktuSekarang, sholatSetelah, waktuTersisa }) => {
     return (
-        <div className="SholatSekarang text-center p-5 bg rounded-xl w-1/2">
-            <h2 className='text-[10px] font-bold mb-1'>Waktu saat ini :</h2>
-            <h1 className='text-4xl font-extrabold text-green-600 mb-4'>  {waktuSekarang}
-            </h1>
-
-            <div className="flex justify-center mb-4">
-                <div className="garis w-1/2 h-px text-center bg-black flex justify-center mb-4"></div>
-            </div>
-            <div className="next-sholat p-2 bg-green-100 rounded-xl w-full shadow-md">
-                <h1 className='text-sm text-center font-bold '>   {sholatSetelah }
-                </h1>
+        <div className="SholatSekarang text-center p-5 bg-white/50 backdrop-blur-md rounded-2xl w-1/2 border border-white/60 shadow-lg shadow-emerald-100/30 flex flex-col justify-between">
+            <div>
+                <h2 className='text-[10px] font-medium mb-1 text-gray-400'>Waktu saat ini</h2>
+                <h1 className='text-3xl font-extrabold text-emerald-600'>{waktuSekarang}</h1>
             </div>
 
-            <div className="next-sholat p-2 bg-green-100 rounded-xl w-full shadow-md mt-3">
-                <h1 className='text-sm text-center font-bold  '>   {waktuTersisa }
-                </h1>
+            <div className="flex justify-center my-3">
+                <div className="w-12 h-px bg-emerald-300"></div>
+            </div>
+
+            <div className="space-y-2">
+                <div className="next-sholat p-2.5 bg-emerald-50/80 backdrop-blur-sm rounded-xl border border-emerald-100">
+                    <h1 className='text-xs text-center font-semibold text-emerald-700'>{sholatSetelah}</h1>
+                </div>
+                <div className="next-sholat p-2.5 bg-emerald-50/80 backdrop-blur-sm rounded-xl border border-emerald-100">
+                    <h1 className='text-xs text-center font-bold text-emerald-600'>{waktuTersisa}</h1>
+                </div>
             </div>
         </div>
     )

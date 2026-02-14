@@ -180,8 +180,8 @@ const Home = () => {
     // Logic Berita End
 
     const islamicQuotes = [
-        { id: 1, quotes: "Sesungguhnya Allah tidak akan mengubah keadaan suatu kaum sampai mereka mengubah keadaan diri mereka sendiri.", sumber: "QS. Ar-Ra’d: 11" },
-        { id: 2, quotes: "Ingatlah, hanya dengan mengingat Allah hati menjadi tenteram.", sumber: "QS. Ar-Ra’d: 28" },
+        { id: 1, quotes: "Sesungguhnya Allah tidak akan mengubah keadaan suatu kaum sampai mereka mengubah keadaan diri mereka sendiri.", sumber: "QS. Ar-Raâ€™d: 11" },
+        { id: 2, quotes: "Ingatlah, hanya dengan mengingat Allah hati menjadi tenteram.", sumber: "QS. Ar-Raâ€™d: 28" },
         { id: 3, quotes: "Sesungguhnya bersama kesulitan ada kemudahan.", sumber: "QS. Al-Insyirah: 6" },
         { id: 4, quotes: "Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya.", sumber: "QS. Al-Baqarah: 286" },
         { id: 5, quotes: "Dan barang siapa bertawakal kepada Allah, niscaya Allah akan mencukupinya.", sumber: "QS. At-Talaq: 3" },
@@ -190,8 +190,8 @@ const Home = () => {
         { id: 8, quotes: "Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia lain.", sumber: "HR. Ahmad" },
         { id: 9, quotes: "Sesungguhnya setiap amal tergantung niatnya.", sumber: "HR. Bukhari & Muslim" },
         { id: 10, quotes: "Barang siapa menempuh jalan untuk mencari ilmu, Allah mudahkan baginya jalan ke surga.", sumber: "HR. Muslim" },
-        { id: 11, quotes: "Ilmu itu bukan yang dihafal, tetapi yang memberi manfaat.", sumber: "Imam Syafi’i" },
-        { id: 12, quotes: "Jika kamu tidak tahan lelahnya belajar, maka kamu harus tahan dengan pahitnya kebodohan.", sumber: "Imam Syafi’i" },
+        { id: 11, quotes: "Ilmu itu bukan yang dihafal, tetapi yang memberi manfaat.", sumber: "Imam Syafiâ€™i" },
+        { id: 12, quotes: "Jika kamu tidak tahan lelahnya belajar, maka kamu harus tahan dengan pahitnya kebodohan.", sumber: "Imam Syafiâ€™i" },
         { id: 13, quotes: "Kesabaran itu ada dua: sabar atas sesuatu yang tidak kamu inginkan dan sabar menahan diri dari sesuatu yang kamu inginkan.", sumber: "Ali bin Abi Thalib" },
         { id: 14, quotes: "Orang yang paling kuat adalah yang mampu mengendalikan dirinya saat marah.", sumber: "Ali bin Abi Thalib" },
         { id: 15, quotes: "Hati akan rusak jika terlalu banyak bergaul tanpa dzikir kepada Allah.", sumber: "Hasan Al-Bashri" },
@@ -203,14 +203,14 @@ const Home = () => {
         { id: 21, quotes: "Sungguh menakjubkan urusan orang beriman, semuanya baik baginya.", sumber: "HR. Muslim" },
         { id: 22, quotes: "Jangan bersedih, sesungguhnya Allah bersama kita.", sumber: "QS. At-Taubah: 40" },
         { id: 23, quotes: "Orang berakal adalah yang menyiapkan dirinya untuk kehidupan setelah mati.", sumber: "HR. Tirmidzi" },
-        { id: 24, quotes: "Waktu adalah pedang, jika tidak kamu gunakan maka ia akan menebasmu.", sumber: "Imam Syafi’i" },
+        { id: 24, quotes: "Waktu adalah pedang, jika tidak kamu gunakan maka ia akan menebasmu.", sumber: "Imam Syafiâ€™i" },
         { id: 25, quotes: "Bertakwalah kepada Allah di mana pun kamu berada.", sumber: "HR. Tirmidzi" },
         { id: 26, quotes: "Dan janganlah kamu berputus asa dari rahmat Allah.", sumber: "QS. Az-Zumar: 53" },
         { id: 27, quotes: "Cukuplah kematian sebagai nasihat.", sumber: "Umar bin Khattab" },
         { id: 28, quotes: "Senyummu kepada saudaramu adalah sedekah.", sumber: "HR. Tirmidzi" },
         { id: 29, quotes: "Barang siapa bersyukur, maka sesungguhnya dia bersyukur untuk dirinya sendiri.", sumber: "QS. Luqman: 12" },
         { id: 30, quotes: "Orang yang paling aku cintai adalah yang paling baik akhlaknya.", sumber: "HR. Bukhari" },
-        { id: 31, quotes: "Sesungguhnya akhirat itu lebih baik dan lebih kekal.", sumber: "QS. Al-A’la: 17" }
+        { id: 31, quotes: "Sesungguhnya akhirat itu lebih baik dan lebih kekal.", sumber: "QS. Al-Aâ€™la: 17" }
     ];
     const jadwalSholatMap = [
         { id: 1, nama: 'Subuh', waktu: jadwalHariIni ? jadwalHariIni.subuh : '--:--', icon: <Sunrise size={20} className='text-orange-400' /> },
@@ -225,15 +225,17 @@ const Home = () => {
     const waktuSekarangStr = `${waktuSekarang.getHours().toString().padStart(2, '0')}:${waktuSekarang.getMinutes().toString().padStart(2, '0')}:${waktuSekarang.getSeconds().toString().padStart(2, '0')}`;
 
     return (
-        <div className='p-6'>
+        <div className='min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 p-6'>
             <header className='flex flex-row justify-between items-center'>
                 <div className="lokasi flex flex-row items-center">
-                    <MapPin size={28} />
-                    <span className='font-semibold text-sm ml-2'>{kabkota},<br />{provinsi}</span>
+                    <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm">
+                        <MapPin size={22} className="text-emerald-600" />
+                    </div>
+                    <span className='font-semibold text-sm ml-3 text-gray-700'>{kabkota},<br /><span className='text-gray-400 text-xs'>{provinsi}</span></span>
                 </div>
                 <Link to="/settings">
-                    <div className="setting" onClick={savePathBefore}>
-                        <SettingsIcon size={28} />
+                    <div className="setting p-2.5 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm hover:shadow-md transition-all" onClick={savePathBefore}>
+                        <SettingsIcon size={22} className="text-gray-600" />
                     </div>
                 </Link>
             </header>
@@ -257,7 +259,7 @@ const Home = () => {
             {jadwalHariIni && (
                 <Link to='/sholat'>
                     <section>
-                        <div className="mt-10 bg-green-100 rounded-2xl w-full mb-5">
+                        <div className="mt-8 bg-white/50 backdrop-blur-md rounded-2xl w-full mb-5 border border-white/60 shadow-lg shadow-emerald-100/50 p-1">
                             <div className="text-neutral-600 flex flex-row justify-between items-center">
                                 {jadwalSholatMap.map((sholat) => (
                                     <JadwalSholat
@@ -282,12 +284,12 @@ const Home = () => {
 
             {/* Artikel Pilihan */}
             <section>
-                <div className="p-5 bg-green-100 rounded-2xl w-full mb-20">
-                    <div className="">
-                        <h1 className='text-lg font-bold mb-3'>Artikel Pilihan</h1>
-                        <p className='text-justify pl-2'>Di sini kami menyediakan berita-berita pilihan yang dapat kamu baca untuk menambah pengatahuan terbaru dunia islam</p>
+                <div className="p-5 bg-white/50 backdrop-blur-md rounded-2xl w-full mb-24 border border-white/60 shadow-lg shadow-emerald-100/50">
+                    <div>
+                        <h1 className='text-lg font-bold mb-2 text-gray-800'>Artikel Pilihan</h1>
+                        <p className='text-justify text-sm text-gray-500'>Di sini kami menyediakan berita-berita pilihan yang dapat kamu baca untuk menambah pengetahuan terbaru dunia islam</p>
                     </div>
-                    <div className="berita flex flex-row mt-5 gap-5 overflow-x-auto pb-2">
+                    <div className="berita flex flex-row mt-5 gap-4 overflow-x-auto pb-2">
                         {
                             dataBerita ? dataBerita.map((berita, i) => (
                                 <Berita
@@ -297,7 +299,7 @@ const Home = () => {
                                     date={berita.date}
                                     url={berita.url}
                                 />
-                            )) : <p>Loading...</p>
+                            )) : <p className='text-gray-400'>Loading...</p>
                         }
                     </div>
 

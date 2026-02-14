@@ -113,36 +113,38 @@ export default function TasbihDigital() {
     };
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-emerald-50 to-teal-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
+        <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 flex items-center justify-center p-4">
+            <div className="w-full max-w-md bg-white/40 backdrop-blur-xl rounded-3xl shadow-xl border border-white/60 p-8">
 
                 {/* Header */}
                 <Link to='/'>
-                    <div onClick={backButton()} className="mb-5 flex justify-start items-center cursor-pointer">
-                        <ChevronRight className="w-6 h-6  rotate-180 cursor-pointer" />
-                        <h1>kembali ke menu</h1>
+                    <div onClick={backButton()} className="mb-5 flex items-center cursor-pointer group">
+                        <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm mr-2 group-hover:bg-emerald-50 transition-colors">
+                            <ChevronRight className="w-5 h-5 text-emerald-600 rotate-180" />
+                        </div>
+                        <span className="text-sm font-medium text-gray-600 group-hover:text-emerald-600 transition-colors">Kembali</span>
                     </div>
                 </Link>
-                <h1 className="text-3xl font-bold text-emerald-800 text-center mb-2">
+                <h1 className="text-3xl font-bold text-gray-800 text-center mb-2">
                     Tasbih Digital
                 </h1>
-                <p className="text-gray-600 text-center mb-2">
+                <p className="text-gray-400 text-sm text-center mb-2">
                     Geser ke kiri untuk tambah dzikir
                 </p>
 
                 {/* Counter */}
                 <div className="text-center mb-2">
-                    <div className="text-5xl font-bold text-emerald-600 mb-2">
+                    <div className="text-5xl font-bold bg-linear-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent mb-2">
                         {count}
                     </div>
-                    <div className="text-gray-500">dari {target}</div>
+                    <div className="text-gray-400 text-sm">dari {target}</div>
                 </div>
 
                 {/* Progress Bar */}
                 <div className="mb-24">
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-white/60 backdrop-blur-md rounded-full h-3 border border-white/60">
                         <div
-                            className="bg-emerald-600 h-full rounded-full transition-all"
+                            className="bg-linear-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all shadow-sm"
                             style={{ width: `${(count / target) * 100}%` }}
                         />
                     </div>
@@ -163,8 +165,8 @@ export default function TasbihDigital() {
                     }}
                 >
                     {/* Titik tengah */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center border-4 border-emerald-600">
-                        <span className="text-2xl font-bold text-emerald-700">{count}</span>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white/60 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-emerald-400 shadow-lg shadow-emerald-200/30">
+                        <span className="text-2xl font-bold bg-linear-to-br from-emerald-600 to-teal-500 bg-clip-text text-transparent">{count}</span>
                     </div>
 
                     {/* Biji-biji tasbih */}
@@ -174,18 +176,18 @@ export default function TasbihDigital() {
 
                     {/* Penanda atas (sebagai patokan) */}
                     <div className="absolute -top-8 left-28 transform -translate-x-1/2 -translate-y-2">
-                        <div className="w-2 h-8 bg-emerald-700 rounded-full"></div>
+                        <div className="w-2 h-8 bg-linear-to-b from-emerald-600 to-emerald-400 rounded-full shadow-md"></div>
                     </div>
                 </div>
 
                 {/* Input Target */}
                 <div className="my-6">
-                    <label className="block text-gray-700 mb-2">Target Dzikir:</label>
+                    <label className="block text-gray-600 text-sm font-medium mb-2">Target Dzikir:</label>
                     <input
                         type="number"
                         value={target}
                         onChange={(e) => setTarget(Number(e.target.value) || 1)}
-                        className="w-full px-4 py-2 border-2 border-emerald-300 rounded-lg focus:outline-none focus:border-emerald-500"
+                        className="w-full px-4 py-3 bg-white/60 backdrop-blur-md border border-white/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent shadow-sm transition-all"
                     />
                 </div>
 
@@ -195,7 +197,10 @@ export default function TasbihDigital() {
                         <button
                             key={preset}
                             onClick={() => setTarget(preset)}
-                            className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200"
+                            className={`px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${target === preset
+                                ? 'bg-linear-to-r from-emerald-500 to-teal-500 text-white shadow-md shadow-emerald-200/40'
+                                : 'bg-white/60 backdrop-blur-md text-gray-500 border border-white/60 hover:bg-white/80'
+                                }`}
                         >
                             {preset}x
                         </button>
@@ -205,16 +210,16 @@ export default function TasbihDigital() {
                 {/* Tombol Reset */}
                 <button
                     onClick={reset}
-                    className="w-full px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-semibold"
+                    className="w-full px-4 py-3.5 bg-linear-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:shadow-lg hover:shadow-emerald-200/50 font-semibold transition-all duration-300 shadow-md"
                 >
-                    🔄 Reset
+                    Reset
                 </button>
 
                 {/* Notif Selesai */}
                 {count >= target && (
-                    <div className="mt-6 p-4 bg-emerald-50 border-2 border-emerald-300 rounded-lg text-center">
-                        <p className="text-emerald-800 font-semibold">
-                            ✨ Alhamdulillah, target tercapai! ✨
+                    <div className="mt-6 p-4 bg-emerald-50/80 backdrop-blur-md border border-emerald-200/50 rounded-2xl text-center">
+                        <p className="text-emerald-700 font-semibold">
+                            Alhamdulillah, target tercapai!
                         </p>
                     </div>
                 )}

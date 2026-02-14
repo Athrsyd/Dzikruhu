@@ -171,20 +171,22 @@ const Sholat = () => {
   }
 
   return (
-    <div className='m-5'>
+    <div className='min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 p-5'>
       <header className='flex flex-row justify-between items-center'>
         <div className="lokasi flex flex-row items-center">
-          <MapPin size={36} />
-          <span className='font-semibold text-sm ml-2'>{kabkota},<br />{provinsi}</span>
+          <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm">
+            <MapPin size={22} className="text-emerald-600" />
+          </div>
+          <span className='font-semibold text-sm ml-3 text-gray-700'>{kabkota},<br /><span className='text-gray-400 text-xs'>{provinsi}</span></span>
         </div>
         <Link to="/settings">
-          <div className="setting" onClick={savePathBefore}>
-            <SettingsIcon size={28} />
+          <div className="setting p-2.5 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm hover:shadow-md transition-all" onClick={savePathBefore}>
+            <SettingsIcon size={22} className="text-gray-600" />
           </div>
         </Link>
       </header>
 
-      <section className='mt-7 flex flex-row justify-between gap-5 items-center w-full'>
+      <section className='mt-7 flex flex-row justify-between gap-4 items-stretch w-full'>
         <MainBento
           sholatSekarang={sholatSekarang ? namaSholat[sholatSekarang] : 'Loading...'}
           waktuMasukSholatSekarang={sholatSekarang && jadwalHariIni ? jadwalHariIni[sholatSekarang] : 'Loading...'} />

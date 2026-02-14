@@ -75,14 +75,17 @@ const Setting = () => {
     switch (item.type) {
       case 'toggle':
         return (
-          <label className="flex items-center gap-3">
-            <input
-              type="checkbox"
-              checked={isLatin ? true : settings[item.id]}
-              onChange={(e) => handleSettingChange(item.id, e.target.checked)}
-              className="w-5 h-5 cursor-pointer"
-            />
-            <span>{settings[item.id] ? 'Aktif' : 'Nonaktif'}</span>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <div className="relative">
+              <input
+                type="checkbox"
+                checked={isLatin ? true : settings[item.id]}
+                onChange={(e) => handleSettingChange(item.id, e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+            </div>
+            <span className="text-sm text-gray-600">{settings[item.id] ? 'Aktif' : 'Nonaktif'}</span>
           </label>
         );
 
@@ -92,7 +95,7 @@ const Setting = () => {
             <select
               value={provinsi || ''}
               onChange={(e) => handleSettingChange('provinsi', e.target.value)}
-              className="p-2 border border-gray-300 rounded-lg w-full"
+              className="p-3 bg-white/60 backdrop-blur-md border border-white/60 rounded-xl w-full outline-none focus:ring-2 focus:ring-emerald-400 text-sm transition-all"
             >
               {daftarProvinsi.length === 0 && <option value="">Pilih Provinsi</option>}
               {daftarProvinsi.map((p) => (
@@ -103,7 +106,7 @@ const Setting = () => {
             <select
               value={kabkota || ''}
               onChange={(e) => handleSettingChange('kabkota', e.target.value)}
-              className="p-2 border border-gray-300 rounded-lg w-full"
+              className="p-3 bg-white/60 backdrop-blur-md border border-white/60 rounded-xl w-full outline-none focus:ring-2 focus:ring-emerald-400 text-sm transition-all"
             >
               {daftarKabKota.length === 0 && <option value="">Pilih Kabupaten/Kota</option>}
               {daftarKabKota.map((k) => (
@@ -118,7 +121,7 @@ const Setting = () => {
           <select
             value={settings[item.id]}
             onChange={(e) => handleSettingChange(item.id, e.target.value)}
-            className="p-2 border border-gray-300 rounded-lg w-full"
+            className="p-3 bg-white/60 backdrop-blur-md border border-white/60 rounded-xl w-full outline-none focus:ring-2 focus:ring-emerald-400 text-sm transition-all"
           >
             {item.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
           </select>
@@ -130,7 +133,7 @@ const Setting = () => {
             type="text"
             value={settings[item.id]}
             onChange={(e) => handleSettingChange(item.id, e.target.value)}
-            className="p-2 border border-gray-300 rounded-lg w-full outline-none"
+            className="p-3 bg-white/60 backdrop-blur-md border border-white/60 rounded-xl w-full outline-none focus:ring-2 focus:ring-emerald-400 text-sm transition-all"
           />
         );
 
@@ -145,44 +148,61 @@ const Setting = () => {
   return (
     <>
       <ScrollToTop />
-      <div>
-        <div className="flex items-center p-4 border-b border-gray-300">
-          <Link to={pathBefore} onClick={handleBack} className="mr-4 text-blue-500 hover:text-blue-700">
-            &#8592; Back
+      <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50">
+        {/* Header */}
+        <header className="sticky top-0 z-10 flex items-center py-4 px-5 bg-white/70 backdrop-blur-xl border-b border-white/60">
+          <Link to={pathBefore} onClick={handleBack} className="flex items-center gap-2 group">
+            <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm group-hover:bg-emerald-50 transition-colors">
+              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+            </div>
+            <span className="text-sm font-medium text-gray-600 group-hover:text-emerald-600 transition-colors">Kembali</span>
           </Link>
-        </div>
+        </header>
+
         <div className="p-5">
-          <h1 className="text-3xl font-bold mb-10">Settings</h1>
-          {/* <div className='search-setting'>
-            <input
-              type="text"
-              placeholder="Search settings..."
-              className="w-full p-2 border border-gray-300 rounded-2xl outline-none mt-4"
-            />
-          </div> */}
-          <div className="mt-6">
-            <ul className="flex flex-col justify-center items-center gap-4">
-              {settingsMenu.map(item => (
-                <div key={item.id} className='w-full '>
-                  <li
-                    className='bg-green-200 p-3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-green-300 transition-all duration-500 ease-in-out'
-                    onClick={() => setOpenSetting(openSetting === item.id ? '' : item.id)}
-                  >
-                    {item.label}
-                    <span className={openSetting === item.id ? 'rotate-90' : ''}>&gt;</span>
-                  </li>
-                  {openSetting === item.id && (
-                    <div className={`bg-green-50 rounded-lg mt-2 overflow-hidden transition-all duration-300 ease-in-out ${openSetting === item.id ? 'max-h-96 p-4' : 'max-h-0 p-0'}`}>
-                      {renderSettingForm(item)}
-                    </div>
-                  )}
-                </div>
-              ))}
-              <li className='bg-green-200 w-full p-3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-green-300 transition'>Infomasi Pembuat <span>&gt;</span></li>
-              <li 
-              onClick={()=> hapusSemuaData()}
-              className='items-center bg-red-200 p-3 w-2/3 rounded-2xl flex justify-between flex-row font-semibold cursor-pointer hover:bg-red-300 transition'>Hapus Semua Data <span className='bg-red-300 p-2 rounded-2xl '><Trash2/></span></li>
-            </ul>
+          <div className="flex items-center mb-6">
+            <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm mr-3">
+              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-800">Pengaturan</h1>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {settingsMenu.map(item => (
+              <div key={item.id} className="w-full">
+                <button
+                  className="w-full bg-white/50 backdrop-blur-md border border-white/60 p-4 rounded-2xl flex justify-between items-center font-semibold text-sm text-gray-700 cursor-pointer hover:bg-white/70 hover:shadow-md shadow-sm transition-all duration-300"
+                  onClick={() => setOpenSetting(openSetting === item.id ? '' : item.id)}
+                >
+                  <span>{item.label}</span>
+                  <div className={`w-6 h-6 flex items-center justify-center rounded-full ${openSetting === item.id ? 'bg-emerald-100 text-emerald-600' : 'text-gray-300'} transition-all`}>
+                    <svg className={`w-4 h-4 transition-transform duration-300 ${openSetting === item.id ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  </div>
+                </button>
+                {openSetting === item.id && (
+                  <div className="bg-white/30 backdrop-blur-md border border-white/40 rounded-xl mt-2 p-4 transition-all duration-300">
+                    {renderSettingForm(item)}
+                  </div>
+                )}
+              </div>
+            ))}
+
+            {/* Info Pembuat */}
+            <button className="w-full bg-white/50 backdrop-blur-md border border-white/60 p-4 rounded-2xl flex justify-between items-center font-semibold text-sm text-gray-700 cursor-pointer hover:bg-white/70 hover:shadow-md shadow-sm transition-all duration-300">
+              <span>Informasi Pembuat</span>
+              <svg className="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </button>
+
+            {/* Hapus Semua Data */}
+            <button
+              onClick={() => hapusSemuaData()}
+              className="mt-4 mx-auto w-2/3 bg-red-50/80 backdrop-blur-md border border-red-200/50 p-4 rounded-2xl flex justify-between items-center font-semibold text-sm text-red-600 cursor-pointer hover:bg-red-100/80 hover:shadow-md shadow-sm transition-all duration-300"
+            >
+              <span>Hapus Semua Data</span>
+              <div className="p-2 bg-red-100/80 rounded-xl">
+                <Trash2 className="w-4 h-4" />
+              </div>
+            </button>
           </div>
         </div>
       </div>

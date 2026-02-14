@@ -112,24 +112,26 @@ const Doa = () => {
     );
 
     return (
-        <div className="p-4 pb-24">
+        <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 p-4 pb-24">
             {/* === MENU KATEGORI === */}
             {view === 'menu' && (
                 <>
                     {/* Header */}
                     <header className="mb-6">
                         <div className="flex items-center mb-4">
-                            <HandHeart className="w-6 h-6 mr-2 text-green-600" />
-                            <h1 className="text-2xl font-bold">Doa & Dzikir</h1>
+                            <div className="p-2 bg-white/60 backdrop-blur-md rounded-xl border border-white/40 shadow-sm mr-3">
+                                <HandHeart className="w-5 h-5 text-emerald-600" />
+                            </div>
+                            <h1 className="text-2xl font-bold text-gray-800">Doa & Dzikir</h1>
                         </div>
 
                         {/* Search Bar */}
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                             <input
                                 type="text"
                                 placeholder="Cari kategori doa..."
-                                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                                className="w-full pl-10 pr-4 py-3 bg-white/60 backdrop-blur-md border border-white/60 rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent shadow-sm transition-all"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -139,31 +141,34 @@ const Doa = () => {
                     {/* Loading */}
                     {loading && (
                         <div className="flex justify-center items-center h-64">
-                            <div className="animate-spin rounded-full border-4 border-gray-300 border-t-green-600 h-12 w-12"></div>
+                            <div className="animate-spin rounded-full border-4 border-emerald-100 border-t-emerald-600 h-12 w-12"></div>
                         </div>
                     )}
 
                     {/* Kategori List */}
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                         {filteredGrup.map((item) => (
                             <button
                                 key={item.id}
                                 onClick={() => handleClickGrup(item.namaKategori)}
-                                className="w-full flex items-center justify-between p-4 bg-neutral-200 hover:bg-neutral-300 border border-gray-300 rounded-xl cursor-pointer transition-all duration-200 text-left group"
+                                className="w-full flex items-center justify-between p-4 bg-white/50 backdrop-blur-md hover:bg-white/70 border border-white/60 rounded-2xl cursor-pointer transition-all duration-300 text-left group shadow-sm hover:shadow-md"
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="flex items-center justify-center w-9 h-9 rounded-full bg-green-100 text-green-700 text-sm font-bold shrink-0">
+                                    <div className="flex items-center justify-center w-9 h-9 rounded-full bg-linear-to-br from-emerald-500 to-teal-500 text-white text-sm font-bold shrink-0 shadow-md shadow-emerald-200/40">
                                         {item.id}
                                     </div>
-                                    <span className="font-medium text-sm">{item.namaKategori}</span>
+                                    <span className="font-medium text-sm text-gray-700">{item.namaKategori}</span>
                                 </div>
-                                <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-green-600 transition-colors shrink-0" />
+                                <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all shrink-0" />
                             </button>
                         ))}
 
                         {filteredGrup.length === 0 && !loading && (
-                            <div className="text-center py-12 text-gray-400">
-                                <p className="text-lg">Kategori tidak ditemukan</p>
+                            <div className="text-center py-16">
+                                <div className="w-16 h-16 mx-auto mb-4 bg-white/60 backdrop-blur-md rounded-2xl border border-white/60 flex items-center justify-center">
+                                    <Search className="w-7 h-7 text-gray-300" />
+                                </div>
+                                <p className="text-gray-400 font-medium">Kategori tidak ditemukan</p>
                             </div>
                         )}
                     </div>
@@ -177,13 +182,13 @@ const Doa = () => {
                     <header className="flex items-center gap-3 mb-6">
                         <button
                             onClick={() => { setView('menu'); setSearch(''); }}
-                            className="flex items-center justify-center w-9 h-9 rounded-full bg-neutral-200 hover:bg-neutral-300 transition-colors cursor-pointer"
+                            className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/60 backdrop-blur-md border border-white/40 shadow-sm hover:bg-emerald-50 transition-colors cursor-pointer"
                         >
-                            <ChevronRight className="w-5 h-5 rotate-180" />
+                            <ChevronRight className="w-5 h-5 text-emerald-600 rotate-180" />
                         </button>
                         <div className="flex-1 min-w-0">
-                            <h1 className="text-lg font-bold truncate">{selectedGrup}</h1>
-                            <p className="text-xs text-gray-500">
+                            <h1 className="text-lg font-bold text-gray-800 truncate">{selectedGrup}</h1>
+                            <p className="text-xs text-gray-400">
                                 {dataDoa ? `${dataDoa.length} doa` : 'Memuat...'}
                             </p>
                         </div>
@@ -192,42 +197,42 @@ const Doa = () => {
                     {/* Loading */}
                     {loading && (
                         <div className="flex justify-center items-center h-64">
-                            <div className="animate-spin rounded-full border-4 border-gray-300 border-t-green-600 h-12 w-12"></div>
+                            <div className="animate-spin rounded-full border-4 border-emerald-100 border-t-emerald-600 h-12 w-12"></div>
                         </div>
                     )}
 
                     {/* Daftar Doa */}
                     {dataDoa && !loading && (
-                        <div className="space-y-5">
+                        <div className="space-y-4">
                             {dataDoa.map((doaItem, index) => (
                                 <div
                                     key={index}
-                                    className={`rounded-2xl p-5 ${index % 2 === 0 ? 'bg-neutral-200' : 'bg-neutral-100'} border border-gray-200`}
+                                    className="bg-white/50 backdrop-blur-md border border-white/60 rounded-2xl p-5 shadow-sm"
                                 >
                                     {/* Nama Doa & Nomor */}
                                     <div className="flex items-start gap-3 mb-4">
-                                        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-green-600 text-white text-xs font-bold shrink-0 mt-0.5">
+                                        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-linear-to-br from-emerald-500 to-teal-500 text-white text-xs font-bold shrink-0 mt-0.5 shadow-md shadow-emerald-200/40">
                                             {index + 1}
                                         </span>
-                                        <h2 className="font-bold text-base">{doaItem.nama}</h2>
+                                        <h2 className="font-bold text-base text-gray-800">{doaItem.nama}</h2>
                                     </div>
 
                                     {/* Teks Arab */}
                                     {doaItem.ar && (
-                                        <div className="text-right mb-4 py-4 px-3 bg-white/60 rounded-xl">
-                                            <p className="font-arabic text-2xl leading-loose">{doaItem.ar}</p>
+                                        <div className="text-right mb-4 py-4 px-4 bg-emerald-50/50 backdrop-blur-sm rounded-xl border border-emerald-100/50">
+                                            <p className="font-arabic text-2xl leading-loose text-gray-800">{doaItem.ar}</p>
                                         </div>
                                     )}
 
                                     {/* Latin */}
                                     {doaItem.tr && (
-                                        <p className="text-sm text-gray-600 italic mb-3 leading-relaxed">{doaItem.tr}</p>
+                                        <p className="text-sm text-emerald-700/70 italic mb-3 leading-relaxed">{doaItem.tr}</p>
                                     )}
 
                                     {/* Terjemahan */}
                                     {doaItem.idn && (
-                                        <div className="border-l-4 border-green-500 pl-3">
-                                            <p className="text-sm text-gray-700 leading-relaxed">{doaItem.idn}</p>
+                                        <div className="border-l-3 border-emerald-400 pl-3">
+                                            <p className="text-sm text-gray-600 leading-relaxed">{doaItem.idn}</p>
                                         </div>
                                     )}
                                 </div>
@@ -236,8 +241,11 @@ const Doa = () => {
                     )}
 
                     {!dataDoa && !loading && (
-                        <div className="text-center py-12 text-gray-400">
-                            <p>Tidak ada data doa</p>
+                        <div className="text-center py-16">
+                            <div className="w-16 h-16 mx-auto mb-4 bg-white/60 backdrop-blur-md rounded-2xl border border-white/60 flex items-center justify-center">
+                                <BookOpen className="w-7 h-7 text-gray-300" />
+                            </div>
+                            <p className="text-gray-400 font-medium">Tidak ada data doa</p>
                         </div>
                     )}
                 </>
