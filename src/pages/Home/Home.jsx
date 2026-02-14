@@ -22,7 +22,7 @@ const Home = () => {
 
     
     useEffect(() => {
-        if (dataUsername ==='' && !dataKabupaten && !dataProvinsi) {
+        if (!dataUsername || !dataKabupaten || !dataProvinsi) {
             navigate('/login')
         }
     }, [])
