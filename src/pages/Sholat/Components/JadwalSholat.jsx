@@ -28,7 +28,7 @@ const JadwalSholat = (children) => {
                 </div>
             </div>
 
-            <div className="waktu-sholat flex gap-2 flex-col mt-2 mb-25">
+            <div className="waktu-sholat flex gap-2 flex-col mt-2 mb-30">
                 {children.array.map((sholat) => (
                     <div key={sholat.id} className={`w-full ${sholat.id % 2 == 0 ? "" : 'bg-green-400'} mx-auto p-3 rounded-xl flex flex-row px-5 text-white font-bold`}>
                         <div className="kiri flex flex-row gap-10 w-1/2">
