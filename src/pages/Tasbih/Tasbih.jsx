@@ -129,7 +129,7 @@ export default function TasbihDigital() {
                     Tasbih Digital
                 </h1>
                 <p className="text-gray-400 text-sm text-center mb-2">
-                    Geser ke kiri untuk tambah dzikir
+                    Geser ke kanan untuk tambah dzikir
                 </p>
 
                 {/* Counter */}
