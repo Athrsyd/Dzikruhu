@@ -1,4 +1,4 @@
-# <img src="/public/MuslimApp_Logo%20(1).png" width="300"> 
+# <div style ="display:"flex"; justify-content:"center"; align-items:"center""><img src="/public/MuslimApp_Logo%20(1).png" width="300"><div/>
 # Dzikruhu — Aplikasi Muslim Modern
 
 ![Muslim App](https://img.shields.io/badge/Muslim%20App-Islamic%20Application-green)
