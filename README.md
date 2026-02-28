@@ -1,5 +1,6 @@
 
 # <div align="center"><img src="/public/MuslimApp_Logo%20(1).png" width="300"></div>
+# <div align="center"><img src="1.jpg" width="300"></div>
 
 # Dzikruhu — Aplikasi Muslim Modern
 
